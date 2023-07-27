@@ -1,15 +1,15 @@
-import createError from "http-errors";
 import express from "express";
+import createError from "http-errors";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import indexRouter from "./routes/index";
-
+import { connectToMongodb } from "./src/db/mongodb";
 const app = express();
 
 const dotenv = require("dotenv");
 dotenv.config();
-
+connectToMongodb();
 const port = process.env.PORT_SERVER;
 console.log(`Example app listening on port http://localhost:${port}`);
 // view engine setup
