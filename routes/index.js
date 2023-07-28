@@ -1,9 +1,16 @@
-import express from "express";
-const indexRouter = express.Router();
-
+import cake from "./cake";
+import about from "./about";
+import home from "./home";
 /* GET home page. */
-indexRouter.get("/", function (req, res, next) {
-    res.render("index", { title: "Express" });
-});
 
-export default indexRouter;
+function route(app) {
+	app.use("/api/cake", cake);
+	app.use("/api/about", about);
+	app.use("/api/home", home);
+
+	app.use("/", function (req, res, next) {
+		res.render("index", { title: "Express" });
+	});
+}
+
+module.exports = route;
