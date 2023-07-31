@@ -3,9 +3,10 @@ const Schema = mongoose.Schema;
 import slug from "slug";
 const cakeSchema = new Schema(
 	{
-		name: { type: String, maxLength: 255 },
+		name: { type: String },
 		description: { type: String },
-		videoId: { type: String, maxLength: 255 },
+		videoId: { type: String },
+		price: { type: String, maxLength: 255 },
 		image: { type: String },
 		slug: { type: String },
 	},

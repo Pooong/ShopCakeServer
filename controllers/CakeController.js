@@ -5,12 +5,13 @@ class CakeController {
 	//[POST] api/cake/create
 	async create(req, res, next) {
 		try {
-			const { name, description, image, videoId, level } = { ...req.body };
+			const { name, description, image, videoId, price } = { ...req.body };
 			const newCake = new Cake({
-				name: name,
-				description: description,
-				image: image,
-				videoId: videoId,
+				name,
+				description,
+				image,
+				videoId,
+				price,
 			});
 			res.send("Da tao thanh cong");
 			newCake.save();
@@ -36,13 +37,14 @@ class CakeController {
 	//[POST] api/cake/update/_id
 	update(req, res, next) {
 		const idUpdate = req.params._id;
-		const { name, image, description, videoId } = req.body;
+		const { name, image, description, videoId, price } = req.body;
 		if (idUpdate) {
 			Cake.findByIdAndUpdate(idUpdate, {
 				name,
 				description,
 				image,
 				videoId,
+				price,
 			})
 				.then(() => res.send("update thành công"))
 				.catch(next);
@@ -69,6 +71,25 @@ class CakeController {
 			res.send(dataCakebyId);
 		} else {
 			res.send("Không tìm thấy Id");
+		}
+	}
+
+	async showCakeBySearch(req, res, next) {
+		const { cakeName } = req.query;
+		if (cakeName) {
+			// console.log({ cakeName });
+			try {
+				const regex = new RegExp(cakeName, "i");
+				const dataCake = await Cake.find({ name: regex });
+				res.status(200).send(dataCake);
+			} catch (error) {
+				res.status(400).send("loi");
+				console.log(error);
+			}
+
+			// const findSearchCake = dataCake.filter((item) => item.name.includes(cakeName));
+		} else {
+			res.send("Loi roi");
 		}
 	}
 }
