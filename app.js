@@ -12,6 +12,7 @@ dotenv.config();
 connectToMongodb();
 const port = process.env.PORT_SERVER;
 console.log(`Example app listening on port http://localhost:${port}`);
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");

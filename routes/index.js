@@ -1,12 +1,27 @@
-import cake from "./cake";
-import about from "./about";
-import home from "./home";
-/* GET home page. */
+import express from "express";
+const router = express.Router();
 
+import productRouter from "./product";
+import aboutRouter from "./about";
+import homeRouter from "./home";
+import productController from "../controllers/ProductController";
+
+/* GET home page. */
 function route(app) {
-	app.use("/api/cake", cake);
-	app.use("/api/about", about);
-	app.use("/api/home", home);
+	//Api
+	//Api/product
+	router.get("/show", productController.showListProduct);
+	//api/show/showbysearch
+	router.get("/show/showbysearch", productController.showProductBySearch);
+	//Api/product/:id
+	router.get("/show/:_id", productController.showById);
+
+	//Api/type
+	//Api/cart
+	//Api/cart/id
+	app.use("/product", productRouter);
+	app.use("/about", aboutRouter);
+	app.use("/home", homeRouter);
 
 	app.use("/", function (req, res, next) {
 		res.render("index", { title: "Express" });

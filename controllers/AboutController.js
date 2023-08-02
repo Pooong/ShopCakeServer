@@ -1,5 +1,4 @@
-import Cake from "../src/models/Cake";
-var ObjectId = require("mongoose").Types.ObjectId;
+import Product from "../src/models/Product";
 
 class AboutController {
 	showAbout(req, res, next) {
