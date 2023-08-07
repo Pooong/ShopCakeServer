@@ -2,7 +2,6 @@ import express from "express";
 const router = express.Router();
 
 import productRouter from "./product";
-import productController from "../controllers/ProductController";
 import authRouter from "./authRouter";
 import userRouter from "./userRouter";
 import apiRouter from "./api";
@@ -16,11 +15,12 @@ function route(app) {
 	//Api/cart/id
 	app.use("/api", apiRouter);
 	app.use("/product", productRouter);
+	//post image
 
 	//Account
 	app.use("/auth", authRouter);
 	app.use("/users", userRouter);
-
+	//Upload Image
 	app.use("/", function (req, res, next) {
 		res.render("index", { title: "Express" });
 	});
